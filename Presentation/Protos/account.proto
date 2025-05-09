@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+option csharp_namespace = "Presentation";
+package account;
+
+service AccountGrpcService {
+
+	rpc CreateAccount (CreateAccountRequest) returns (CreateAccountReply);
+	rpc ValidateCredentials (ValidateCredentialsRequest) returns (ValidateCredentialsReply);
+	rpc GetAccounts (GetAccountsRequest) returns (GetAccountsReply);
+	rpc GetAccountById (GetAccountByIdRequest) returns (GetAccountByIdReply);
+	rpc UpdatePhoneNumber (UpdatePhoneNumberRequest) returns (UpdatePhoneNumberReply);
+	rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountReply);
+	rpc ConfirmAccount (ConfirmAccountRequest) returns (ConfirmAccountReply);
+	rpc UpdateEmail (UpdateEmailRequest) returns (UpdateEmailReply);
+	rpc ConfirmEmailChange (ConfirmEmailChangeRequest) returns (ConfirmEmailChangeReply);
+	rpc ResetPassword (ResetPasswordRequest) returns (ResetPasswordReply);
+	rpc GenerateEmailConfirmationToken (GenerateTokenRequest) returns (GenerateTokenReply);
+	rpc GeneratePasswordResetToken (GenerateTokenRequest) returns (GenerateTokenReply);
+
+}
+
+message CreateAccountRequest {
+	string email = 1;
+	string password = 2;
+}
+
+message CreateAccountReply {
+	string user_id = 1;
+	bool succeeded = 2;
+	string message = 3;
+}
+
+message ValidateCredentialsRequest {
+	string email = 1;
+	string password = 2;
+}
+
+message ValidateCredentialsReply {
+	string user_id = 1;
+	bool succeeded = 2;
+	string message = 3;
+}
+
+message GetAccountsRequest {}
+
+message GetAccountsReply {
+	repeated Account accounts = 1;
+	bool succeeded = 2;
+	string message = 3;
+}
+
+message Account {
+	string user_id = 1;
+	string user_name = 2;
+	string email = 3;
+	string phone_number = 4;
+}
+
+message GetAccountByIdRequest {
+	string user_id = 1;
+}
+
+message GetAccountByIdReply {
+	Account account = 1;
+	bool succeeded = 2;
+	string message = 3;
+}
+
+message UpdatePhoneNumberRequest {
+	string user_id = 1;
+	string phone_number = 2;
+}
+
+message UpdatePhoneNumberReply {
+	bool succeeded = 1;
+	string message = 2;
+}
+
+message DeleteAccountRequest {
+	string user_id = 1;
+}
+
+message DeleteAccountReply {
+	bool succeeded = 1;
+	string message = 2;
+}
+
+message ConfirmAccountRequest {
+	string user_id = 1;
+	string token = 2;
+}
+
+message ConfirmAccountReply {
+	bool succeeded = 1;
+	string message = 2;
+}
+
+message UpdateEmailRequest {
+	string user_id = 1;
+	string email = 2;
+	string new_email = 3;
+}
+
+message UpdateEmailReply {
+	bool succeeded = 1;
+	string message = 2;
+	string token = 3; 
+}
+
+message ConfirmEmailChangeRequest {
+	string user_id = 1;
+	string new_email = 2;
+	string token = 3;
+}
+
+message ConfirmEmailChangeReply {
+	bool succeeded = 1;
+	string message = 2;
+}
+
+message ResetPasswordRequest {
+	string user_id = 1;
+	string token = 2;
+	string new_password = 3;
+}
+
+message ResetPasswordReply {
+	bool succeeded = 1;
+	string message = 2;
+}
+
+message GenerateTokenRequest {
+	string user_id = 1;
+}
+
+message GenerateTokenReply {
+	string token = 1;
+	bool succeeded = 2;
+	string message = 3;
+}
