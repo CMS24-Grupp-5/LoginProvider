@@ -12,7 +12,7 @@ namespace Presentation.Controllers;
 public class LoginController(IService service) : ControllerBase
 {
 
-    private readonly IService _service= service;  
+    private readonly IService _service = service;  
 
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginForm formData)
