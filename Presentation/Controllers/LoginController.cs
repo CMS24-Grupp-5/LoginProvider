@@ -29,7 +29,6 @@ public class LoginController(IService service) : ControllerBase
             return Ok(result);
         }
 
-
         return BadRequest(result);
     }
 }
